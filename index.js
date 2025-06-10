@@ -9,3 +9,7 @@ app.get('/', (req, res) => {
 app.listen(PORT, () => {
     console.log(`API démarrée sur le port ${PORT}`);
 });
+
+app.get('/status', (req, res) => {
+    res.json({ status: "ok" });
+});
