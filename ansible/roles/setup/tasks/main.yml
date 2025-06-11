@@ -31,6 +31,8 @@
     production: yes
 
 - name: Démarrer l'application avec PM2
-  shell: pm2 start index.js --name cicd-api
+  shell: |
+    pm2 delete cicd-api || true
+    pm2 start index.js --name cicd-api
   args:
     chdir: /home/adminuser/app
