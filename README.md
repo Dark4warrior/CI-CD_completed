@@ -66,3 +66,35 @@ terraform output public_ip_address
 ```
 
 ⚠️ Le dossier `.terraform/` est ignoré pour éviter de versionner les fichiers lourds du provider local.
+
+## 🔧 Configuration du serveur avec Ansible
+
+L'infrastructure provisionnée via Terraform est automatiquement configurée avec Ansible.
+
+### 🧰 Outils installés via Ansible :
+
+- Node.js 18
+- npm
+- Git
+- PM2 (gestionnaire de processus Node.js)
+- Clonage de l’API depuis GitHub
+- Lancement automatique avec PM2
+
+### 📁 Structure Ansible
+
+Le playbook principal se trouve dans :
+
+- ansible/hosts — Inventaire (adresse IP de la VM Azure)
+- ansible/playbook.yml — Playbook principal
+- ansible/roles/setup/tasks/main.yml — Liste des tâches de configuration
+
+![image](https://github.com/user-attachments/assets/208690cd-e2b0-440b-a9c1-5aed22819ab3)
+
+
+### ▶️ Lancer le provisionnement :
+
+Depuis une distribution Linux ou WSL :
+
+```bash
+ansible-playbook -i ansible/hosts ansible/playbook.yml
+
