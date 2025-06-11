@@ -1,0 +1,36 @@
+- name: Mettre à jour les paquets
+  apt:
+    update_cache: yes
+
+- name: Installer Git et curl
+  apt:
+    name:
+      - git
+      - curl
+    state: present
+
+- name: Installer Node.js (via NodeSource)
+  shell: |
+    curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
+    apt-get install -y nodejs
+
+- name: Installer PM2 globalement
+  npm:
+    name: pm2
+    global: yes
+
+- name: Cloner l'application depuis GitHub
+  git:
+    repo: https://github.com/Dark4warrior/CI-CD_completed.git
+    dest: /home/adminuser/app
+    version: main
+
+- name: Installer les dépendances de l'application
+  npm:
+    path: /home/adminuser/app
+    production: yes
+
+- name: Démarrer l'application avec PM2
+  shell: pm2 start index.js --name cicd-api
+  args:
+    chdir: /home/adminuser/app

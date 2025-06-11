@@ -1,0 +1,5 @@
+- name: Provisionner la VM avec Node.js, PM2 et l'app
+  hosts: web
+  become: true
+  roles:
+    - setup

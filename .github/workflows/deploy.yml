@@ -1,0 +1,42 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🧾 Checkout code
+        uses: actions/checkout@v3
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: 📦 Install dependencies
+        run: npm install
+
+      - name: ✅ Run tests
+        run: npm test
+
+      - name: 🚀 Install Ansible
+        run: |
+          sudo apt update
+          sudo apt install -y ansible sshpass
+
+      - name: 🔐 Prepare SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+        shell: bash
+
+      - name: 🚀 Run Ansible playbook
+        run: |
+          ansible-playbook -i ansible/hosts ansible/playbook.yml
