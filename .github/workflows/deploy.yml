@@ -38,5 +38,7 @@ jobs:
         shell: bash
 
       - name: 🚀 Run Ansible playbook
+        env:
+            ANSIBLE_HOST_KEY_CHECKING: False
         run: |
-          ansible-playbook -i ansible/hosts ansible/playbook.yml
+            ansible-playbook -i ansible/hosts ansible/playbook.yml
