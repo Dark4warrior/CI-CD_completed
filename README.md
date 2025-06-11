@@ -123,10 +123,37 @@ Le fichier `deploy.yml` utilise la clé privée SSH définie comme secret GitHub
 
 ---
 
+## 🏷️ Versionnement sémantique et tags Git
+
+Ce projet adopte le versionnement sémantique (SemVer) au format :
+
+```
+v<MAJOR>.<MINOR>.<PATCH>
+```
+
+Exemples :
+
+* v1.0.0 : première version stable
+* v1.1.0 : ajout de nouvelles fonctionnalités
+* v1.1.1 : correction de bugs mineurs
+
+### 📌 Création d’un tag Git :
+
+```bash
+git tag -a v1.0.0 -m "Version stable 1.0.0"
+git push origin v1.0.0
+```
+
+### 📦 Publication :
+
+* Les tags peuvent être retrouvés dans l’onglet "Releases" du dépôt GitHub
+* Chaque version du code est ainsi associée à un snapshot du dépôt (code archivé et identifiable)
+
+---
+
 ✅ Prochaines étapes :
 
-* Intégration du versionnement et des tags
-* Sauvegardes via Terraform
-* Procédures de rollback
+* Sauvegardes via Terraform (snapshots de VM)
+* Procédures de rollback documentées
 
 📸 Des captures d'écran avec légende seront réalisées pour valider les étapes du livrable final.
