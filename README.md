@@ -67,34 +67,66 @@ terraform output public_ip_address
 
 ⚠️ Le dossier `.terraform/` est ignoré pour éviter de versionner les fichiers lourds du provider local.
 
+---
+
 ## 🔧 Configuration du serveur avec Ansible
 
 L'infrastructure provisionnée via Terraform est automatiquement configurée avec Ansible.
 
 ### 🧰 Outils installés via Ansible :
 
-- Node.js 18
-- npm
-- Git
-- PM2 (gestionnaire de processus Node.js)
-- Clonage de l’API depuis GitHub
-- Lancement automatique avec PM2
+* Node.js 18
+* npm
+* Git
+* PM2 (gestionnaire de processus Node.js)
+* Clonage de l’API depuis GitHub
+* Lancement automatique avec PM2
 
 ### 📁 Structure Ansible
 
-Le playbook principal se trouve dans :
+* `ansible/hosts` — Inventaire (adresse IP de la VM Azure)
+* `ansible/playbook.yml` — Playbook principal
+* `ansible/roles/setup/tasks/main.yml` — Liste des tâches de configuration
 
-- ansible/hosts — Inventaire (adresse IP de la VM Azure)
-- ansible/playbook.yml — Playbook principal
-- ansible/roles/setup/tasks/main.yml — Liste des tâches de configuration
-
-![image](https://github.com/user-attachments/assets/208690cd-e2b0-440b-a9c1-5aed22819ab3)
-
-
-### ▶️ Lancer le provisionnement :
-
-Depuis une distribution Linux ou WSL :
+### ▶️ Lancer le provisionnement (depuis WSL ou Linux) :
 
 ```bash
 ansible-playbook -i ansible/hosts ansible/playbook.yml
+```
 
+L’API est alors automatiquement déployée et accessible à l’adresse :
+
+http\://\<IP\_VM>:3000
+
+---
+
+## 🚀 Pipeline CI/CD avec GitHub Actions
+
+Chaque push sur les branches `main` ou `develop` déclenche automatiquement :
+
+* Installation des dépendances
+* (Test désactivé pour le moment)
+* Installation d’Ansible
+* Connexion SSH à la VM distante
+* Provisionnement via Ansible (déploiement automatique)
+
+### 🔐 Secrets GitHub utilisés :
+
+Le fichier `deploy.yml` utilise la clé privée SSH définie comme secret GitHub :
+
+* Nom du secret : `SSH_PRIVATE_KEY`
+* Utilisé pour établir la connexion sécurisée entre le runner GitHub et la VM Azure
+
+### 📁 Localisation du pipeline :
+
+* `.github/workflows/deploy.yml`
+
+---
+
+✅ Prochaines étapes :
+
+* Intégration du versionnement et des tags
+* Sauvegardes via Terraform
+* Procédures de rollback
+
+📸 Des captures d'écran avec légende seront réalisées pour valider les étapes du livrable final.
