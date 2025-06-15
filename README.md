@@ -35,9 +35,8 @@ main
 * **release/** : préparation d’une version
 * **hotfix/** : correction rapide en prod
 
-📸 Capture à insérer : Vue GitHub des branches (onglet "branches")
+![image](https://github.com/user-attachments/assets/0c3bfce1-ecb8-429e-96dc-5f656b72cc62)
 
-📸 Capture à insérer : Historique des commits de `main` et `develop`
 
 ---
 
@@ -63,10 +62,12 @@ terraform apply
 
 ```bash
 terraform output public_ip_address
+
 ```
 
-📸 Capture à insérer : Terminal avec terraform apply réussi
+![Rollback via Terraform](https://github.com/user-attachments/assets/4460c33e-bb68-47ce-8d17-73a48366209d)
 
+Capture de l'exécution de la commande `terraform apply` sur le fichier `rollback.tf`, déclenchant la restauration complète de la VM depuis un snapshot précédent. L'adresse IP publique générée est bien affichée, indiquant une VM restaurée et fonctionnelle.
 ---
 
 ## 🔧 Configuration serveur avec Ansible
@@ -84,8 +85,9 @@ terraform output public_ip_address
 ansible-playbook -i ansible/hosts ansible/playbook.yml
 ```
 
-📸 Capture à insérer : Exécution Ansible dans le terminal
+![Exécution d'Ansible](https://github.com/user-attachments/assets/20f41b3b-8f08-4951-b993-f49cf5d76d75)
 
+Playbook exécuté avec succès depuis WSL Ubuntu. Toutes les étapes de configuration serveur sont automatisées.
 ---
 
 ## 🚀 Pipeline CI/CD (GitHub Actions)
@@ -106,8 +108,7 @@ Branche `main` ou `develop` → déclenche le déploiement
 * `SSH_PRIVATE_KEY` : clé privée SSH pour accès VM
 * `VM_IP` : IP dynamique de la VM
 
-📸 Capture à insérer : Exécution GitHub Actions (workflow complet)
-
+![Exécution GitHub Actions (workflow complet)](https://github.com/user-attachments/assets/326cc4ec-2c2b-487e-80ee-5509477910b7)
 ---
 
 ## 📊 Versionnement sémantique (SemVer)
@@ -126,8 +127,7 @@ Exemples :
 git tag -a v1.0.0 -m "Version 1.0.0"
 git push origin v1.0.0
 ```
-
-📸 Capture à insérer : Onglet "Releases" avec un tag
+![Onglet "Releases" avec un tag](https://github.com/user-attachments/assets/61b7cae3-5b72-4b85-99a2-89a76bf97e8a)
 
 ---
 
@@ -138,6 +138,7 @@ git push origin v1.0.0
 * Secrets stockés dans GitHub (onglet Secrets)
 
 📸 Capture à insérer : GitHub Settings > Secrets
+![ GitHub Settings > Secrets](https://github.com/user-attachments/assets/d0397c72-a83e-4ebc-ab8d-5b5c7ca5501d)
 
 ---
 
@@ -161,6 +162,10 @@ terraform apply -target=azurerm_virtual_machine.vm_restore
 * terraform/rollback.tf
 
 📸 Capture à insérer : Rollback réussi (terraform apply)
+
+![Rollback réussi](https://github.com/user-attachments/assets/559a1be4-927a-4672-ac3f-ddc41bd4983a)
+
+![Rollback via Terraform](https://github.com/user-attachments/assets/4460c33e-bb68-47ce-8d17-73a48366209d)
 
 ---
 
@@ -201,4 +206,7 @@ terraform apply -target=azurerm_snapshot.vm_snapshot
 terraform apply -target=azurerm_virtual_machine.vm_restore
 ```
 
-📸 Capture à insérer : état avant / après rollback
+![état avant rollback](https://github.com/user-attachments/assets/df7bdfc4-1413-4879-9154-f3901264d407)
+
+![état après rollback](https://github.com/user-attachments/assets/26d227d1-fe06-4023-ab98-dedea3e0f14f)
+
